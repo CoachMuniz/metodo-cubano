@@ -11,148 +11,124 @@ export const MathematicalAuditModal: React.FC<MathematicalAuditModalProps> = ({ 
   const audit = plan.audit;
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 9999,
-      padding: 16
-    }}>
-      <div className="daom-card" style={{
-        maxWidth: 750,
-        width: '100%',
-        maxHeight: '90vh',
-        overflowY: 'auto',
-        backgroundColor: 'var(--daom-surface-1)',
-        border: '1px solid var(--daom-border-strong)'
-      }}>
+    <div className="daom-modal-backdrop" onClick={onClose}>
+      <div className="daom-modal" onClick={e => e.stopPropagation()} style={{ maxWidth: 740 }}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, borderBottom: '1px solid var(--daom-border-subtle)', paddingBottom: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <ShieldCheck style={{ color: 'var(--daom-primary)' }} size={24} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, borderBottom: '1px solid var(--n-200)', paddingBottom: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{
+              width: 40,
+              height: 40,
+              borderRadius: 'var(--r-md)',
+              backgroundColor: 'var(--daom-blue-soft)',
+              color: 'var(--daom-blue)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <ShieldCheck size={22} />
+            </div>
             <div>
-              <h2 style={{ fontSize: 18, fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
-                Auditoría Matemática y Metodológica (AGENTE 5)
+              <div className="daom-eyebrow">AUDITORÍA METODOLÓGICA Y FORMAL</div>
+              <h2 style={{ fontSize: 18, fontWeight: 800, margin: 0, color: 'var(--n-900)' }}>
+                Verificación de Invariantes
               </h2>
-              <p style={{ fontSize: 12, color: 'var(--daom-text-secondary)', margin: 0 }}>
-                Verificación formal de invariantes matemáticas y conservación de volumen.
-              </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="touch-target"
-            style={{ backgroundColor: 'transparent', color: 'var(--daom-text-secondary)', padding: 6 }}
+            className="daom-btn daom-btn--ghost"
+            style={{ padding: 8, minHeight: 'auto', minWidth: 'auto' }}
+            title="Cerrar modal"
           >
             <X size={20} />
           </button>
         </div>
 
         {/* Estado General */}
-        <div style={{
-          backgroundColor: audit.isVolumeConserved100 ? 'var(--daom-success-bg)' : 'var(--daom-danger-bg)',
-          border: `1px solid ${audit.isVolumeConserved100 ? 'var(--daom-success)' : 'var(--daom-danger)'}`,
-          borderRadius: 'var(--radius-md)',
-          padding: 16,
-          marginBottom: 20,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12
-        }}>
+        <div className={`daom-alert ${audit.isVolumeConserved100 ? 'daom-alert--success' : 'daom-alert--danger'}`} style={{ marginBottom: 20 }}>
           {audit.isVolumeConserved100 ? (
-            <CheckCircle2 size={28} style={{ color: 'var(--daom-success)', flexShrink: 0 }} />
+            <CheckCircle2 size={24} style={{ color: 'var(--success)', flexShrink: 0 }} />
           ) : (
-            <AlertTriangle size={28} style={{ color: 'var(--daom-danger)', flexShrink: 0 }} />
+            <AlertTriangle size={24} style={{ color: 'var(--danger)', flexShrink: 0 }} />
           )}
           <div>
-            <div style={{ fontWeight: 800, fontSize: 16, color: '#FFFFFF' }}>
+            <div style={{ fontWeight: 800, fontSize: 15, color: audit.isVolumeConserved100 ? 'var(--success)' : 'var(--danger)' }}>
               {audit.isVolumeConserved100
                 ? 'CONSERVACIÓN EXACTA DEL VOLUMEN VERIFICADA AL 100%'
                 : 'DISCREPANCIA DETECTADA EN CONSERVACIÓN DE VOLUMEN'}
             </div>
-            <div style={{ fontSize: 13, color: 'var(--daom-text-secondary)', marginTop: 2 }}>
+            <div style={{ fontSize: 13, color: 'var(--n-700)', marginTop: 2 }}>
               {audit.isVolumeConserved100
-                ? 'El motor matemático garantiza que no se pierde ni crea ninguna repetición en toda la jerarquía.'
+                ? 'El algoritmo biproporcional de Hamilton garantiza que la suma de microciclos, ejercicios, días y zonas coincide rigurosamente con el volumen total prescripto.'
                 : `Se detectó una desviación neta de ${audit.mesocycleRepsDiff} repeticiones.`}
             </div>
           </div>
         </div>
 
         {/* Métricas de Invariantes */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 10, marginBottom: 20 }}>
-          <div style={{ backgroundColor: 'var(--daom-surface-2)', padding: 10, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 11, color: 'var(--daom-text-secondary)' }}>Target Mesociclo</div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#FFFFFF' }}>{audit.summary.totalTargetReps}</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 20 }}>
+          <div style={{ backgroundColor: 'var(--n-100)', padding: 12, borderRadius: 'var(--r-md)', textAlign: 'center', border: '1px solid var(--n-200)' }}>
+            <div style={{ fontSize: 11, color: 'var(--n-600)', fontWeight: 700 }}>Target Mesociclo</div>
+            <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--n-900)', marginTop: 2 }}>{audit.summary.totalTargetReps}</div>
           </div>
-          <div style={{ backgroundColor: 'var(--daom-surface-2)', padding: 10, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 11, color: 'var(--daom-text-secondary)' }}>Suma Microciclos</div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--daom-primary)' }}>{audit.summary.sumMicrocyclesReps}</div>
+          <div style={{ backgroundColor: 'var(--n-100)', padding: 12, borderRadius: 'var(--r-md)', textAlign: 'center', border: '1px solid var(--n-200)' }}>
+            <div style={{ fontSize: 11, color: 'var(--n-600)', fontWeight: 700 }}>Suma Microciclos</div>
+            <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--daom-blue)', marginTop: 2 }}>{audit.summary.sumMicrocyclesReps}</div>
           </div>
-          <div style={{ backgroundColor: 'var(--daom-surface-2)', padding: 10, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 11, color: 'var(--daom-text-secondary)' }}>Suma Ejercicios</div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--daom-primary)' }}>{audit.summary.sumExercisesReps}</div>
+          <div style={{ backgroundColor: 'var(--n-100)', padding: 12, borderRadius: 'var(--r-md)', textAlign: 'center', border: '1px solid var(--n-200)' }}>
+            <div style={{ fontSize: 11, color: 'var(--n-600)', fontWeight: 700 }}>Suma Ejercicios</div>
+            <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--daom-blue)', marginTop: 2 }}>{audit.summary.sumExercisesReps}</div>
           </div>
-          <div style={{ backgroundColor: 'var(--daom-surface-2)', padding: 10, borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
-            <div style={{ fontSize: 11, color: 'var(--daom-text-secondary)' }}>Suma Zonas (Días)</div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--daom-primary)' }}>{audit.summary.sumZonesReps}</div>
+          <div style={{ backgroundColor: 'var(--n-100)', padding: 12, borderRadius: 'var(--r-md)', textAlign: 'center', border: '1px solid var(--n-200)' }}>
+            <div style={{ fontSize: 11, color: 'var(--n-600)', fontWeight: 700 }}>Suma Zonas (Días)</div>
+            <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--daom-blue)', marginTop: 2 }}>{audit.summary.sumZonesReps}</div>
           </div>
         </div>
 
         {/* Lista de Verificaciones Formales */}
-        <h3 style={{ fontSize: 14, fontWeight: 700, color: '#FFFFFF', marginBottom: 10 }}>
-          Lista de Verificaciones Formales:
+        <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--n-900)', marginBottom: 12 }}>
+          Comprobación Algorítmica de los 8 Invariantes:
         </h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
           {audit.checks.map((chk, i) => (
             <div
               key={i}
               style={{
-                backgroundColor: 'var(--daom-surface-2)',
-                padding: '10px 14px',
-                borderRadius: 'var(--radius-sm)',
-                borderLeft: `4px solid ${chk.passed ? 'var(--daom-success)' : 'var(--daom-danger)'}`,
+                backgroundColor: 'var(--n-50)',
+                padding: '12px 16px',
+                borderRadius: 'var(--r-md)',
+                border: '1px solid var(--n-200)',
+                borderLeft: `4px solid ${chk.passed ? 'var(--success)' : 'var(--danger)'}`,
                 display: 'flex',
                 alignItems: 'flex-start',
-                gap: 10
+                gap: 12
               }}
             >
               <div style={{ marginTop: 2 }}>
                 {chk.passed ? (
-                  <CheckCircle2 size={16} style={{ color: 'var(--daom-success)' }} />
+                  <CheckCircle2 size={18} style={{ color: 'var(--success)' }} />
                 ) : (
-                  <AlertTriangle size={16} style={{ color: 'var(--daom-danger)' }} />
+                  <AlertTriangle size={18} style={{ color: 'var(--danger)' }} />
                 )}
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, fontSize: 13, color: '#FFFFFF' }}>{chk.name}</div>
-                <div style={{ fontSize: 12, color: 'var(--daom-text-secondary)', marginTop: 2 }}>{chk.message}</div>
+                <div style={{ fontWeight: 700, fontSize: 13, color: 'var(--n-900)' }}>{chk.name}</div>
+                <div style={{ fontSize: 12, color: 'var(--n-600)', marginTop: 2 }}>{chk.message}</div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Footer */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid var(--daom-border-subtle)', paddingTop: 14 }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid var(--n-200)', paddingTop: 16 }}>
           <button
             onClick={onClose}
-            className="touch-target"
-            style={{
-              padding: '10px 20px',
-              backgroundColor: 'var(--daom-primary)',
-              color: '#FFFFFF',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 700,
-              fontSize: 14
-            }}
+            className="daom-btn daom-btn--primary"
+            style={{ fontSize: 14, padding: '10px 24px' }}
           >
-            Entendido
+            Cerrar Auditoría
           </button>
         </div>
       </div>

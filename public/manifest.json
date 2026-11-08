@@ -4,8 +4,8 @@
   "description": "Automatización metodológica y matemática de mesociclos de Weightlifting según el método cubano.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0B0B0D",
-  "theme_color": "#0B0B0D",
+  "background_color": "#F8FAFC",
+  "theme_color": "#003B8E",
   "orientation": "portrait-primary",
   "icons": [
     {

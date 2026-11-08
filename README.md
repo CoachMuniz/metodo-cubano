@@ -2,7 +2,7 @@
 
 Aplicación Web Progresiva (PWA) de nivel profesional para la planificación automatizada, matemáticamente exacta y metodológicamente rigurosa de mesociclos de halterofilia (Weightlifting) según el **Método Cubano**.
 
-Desarrollada bajo los lineamientos oficiales de la escuela cubana de levantamiento de pesas y el sistema de diseño visual **DAOM Weightlifting** (paleta oscura de alto contraste: `#0B0B0D`, `#1677D2`, `#FFFFFF`, `#D1D5DB`).
+Desarrollada bajo los lineamientos oficiales de la escuela cubana de levantamiento de pesas y el **Manual de Identidad Visual oficial DAOM Weightlifting v1.0 — Modular Analítica** (paleta oficial en modo claro: Fondo App `#F8FAFC`, Superficies y Cards `#FFFFFF` con borde `#E5E7EB`, Azul DAOM `#003B8E`, Rojo Acento `#FF1E25` y tipografía `Inter`).
 
 ---
 

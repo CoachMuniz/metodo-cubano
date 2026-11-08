@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dumbbell, ShieldCheck, FolderKanban, PlusCircle, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, FolderKanban, PlusCircle, CheckCircle2 } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSavedPlans: () => void;
@@ -15,81 +15,80 @@ export const Header: React.FC<HeaderProps> = ({
   isAuditPassed
 }) => {
   return (
-    <header className="daom-card no-print" style={{ marginBottom: 24, padding: '16px 24px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{
-            width: 44,
-            height: 44,
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--daom-primary)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#FFFFFF'
-          }}>
-            <Dumbbell size={24} />
-          </div>
-          <div>
-            <h1 style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.02em', color: '#FFFFFF', margin: 0 }}>
-              MÉTODO CUBANO
-            </h1>
-            <p style={{ fontSize: 13, color: 'var(--daom-text-secondary)', margin: 0 }}>
-              Planificador Profesional de Mesociclos de Weightlifting
-            </p>
-          </div>
+    <header
+      className="daom-card no-print"
+      style={{
+        marginBottom: 24,
+        padding: '16px 24px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: 16
+      }}
+    >
+      {/* Bloque de Identidad Oficial DAOM */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
+        {/* Logo oficial DAOM Weightlifting sobre fondo blanco */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src="/assets/logos/daom-weightlifting-horizontal-azul.png"
+            alt="DAOM Weightlifting"
+            style={{
+              height: 38,
+              width: 'auto',
+              minWidth: 140,
+              objectFit: 'contain'
+            }}
+          />
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <button
-            onClick={onOpenAudit}
-            className="touch-target badge badge-success"
-            style={{ padding: '8px 14px', fontSize: 13, cursor: 'pointer' }}
-            title="Verificar auditoría matemática de volumen e intensidades"
-          >
-            {isAuditPassed ? <CheckCircle2 size={16} /> : <ShieldCheck size={16} />}
-            <span>Auditoría Matemática</span>
-          </button>
+        {/* Separador vertical */}
+        <div style={{ width: 1, height: 36, backgroundColor: 'var(--n-200)' }} />
 
-          <button
-            onClick={onOpenSavedPlans}
-            className="touch-target"
-            style={{
-              padding: '8px 14px',
-              backgroundColor: 'var(--daom-surface-2)',
-              color: 'var(--daom-text-primary)',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--daom-border-subtle)',
-              fontSize: 13,
-              fontWeight: 600,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
-            }}
-          >
-            <FolderKanban size={16} />
-            <span>Mis Mesociclos</span>
-          </button>
-
-          <button
-            onClick={onNewPlan}
-            className="touch-target"
-            style={{
-              padding: '8px 16px',
-              backgroundColor: 'var(--daom-primary)',
-              color: '#FFFFFF',
-              borderRadius: 'var(--radius-md)',
-              fontSize: 13,
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
-            }}
-          >
-            <PlusCircle size={16} />
-            <span>Nuevo Plan</span>
-          </button>
+        {/* Título de la aplicación */}
+        <div>
+          <div className="daom-eyebrow">
+            SISTEMA MODULAR ANALÍTICO
+          </div>
+          <h1 style={{ fontSize: 18, fontWeight: 800, color: 'var(--n-900)', margin: 0, letterSpacing: '-0.02em' }}>
+            Calculadora Método Cubano
+          </h1>
         </div>
+      </div>
+
+      {/* Acciones de Navegación */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+        {/* Auditoría Matemática en vivo */}
+        <button
+          onClick={onOpenAudit}
+          className={`badge ${isAuditPassed ? 'badge-success' : 'badge-warning'} touch-target`}
+          style={{ padding: '8px 14px', fontSize: 13, cursor: 'pointer', borderRadius: 'var(--r-md)' }}
+          title="Verificar auditoría matemática de volumen e intensidades"
+        >
+          {isAuditPassed ? <CheckCircle2 size={16} /> : <ShieldCheck size={16} />}
+          <span>Auditoría Matemática</span>
+        </button>
+
+        {/* Mis Mesociclos */}
+        <button
+          onClick={onOpenSavedPlans}
+          className="daom-btn daom-btn--secondary"
+          style={{ fontSize: 13 }}
+        >
+          <FolderKanban size={16} />
+          <span>Mis Mesociclos</span>
+        </button>
+
+        {/* Nuevo Plan */}
+        <button
+          onClick={onNewPlan}
+          className="daom-btn daom-btn--primary"
+          style={{ fontSize: 13 }}
+        >
+          <PlusCircle size={16} />
+          <span>Nuevo Plan</span>
+        </button>
       </div>
     </header>
   );

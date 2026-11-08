@@ -31,27 +31,41 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
   if (!Number.isInteger(data.totalReps)) errors.push('El volumen debe ser un número entero.');
   if (!Number.isInteger(data.targetMesocycleImr)) errors.push('La IMR objetivo debe ser un número entero.');
   if (data.targetMesocycleImr < 45 || data.targetMesocycleImr > 80) {
-    errors.push('La IMR del mesociclo debe estar dentro del rango metodológico habitual (45% a 80%).');
+    errors.push('La IMR del mesociclo debe estar dentro del rango normado por las tablas cubanas (45% a 80%).');
   }
 
   const isValid = errors.length === 0;
 
   return (
-    <div className="daom-card" style={{ maxWidth: 900, margin: '0 auto' }}>
-      <div className="daom-card-header" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <Layers style={{ color: 'var(--daom-primary)' }} size={22} />
+    <div className="daom-card" style={{ maxWidth: 960, margin: '0 auto 24px auto' }}>
+      <div className="daom-card-header" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{
+          width: 40,
+          height: 40,
+          borderRadius: 'var(--r-md)',
+          backgroundColor: 'var(--daom-blue-soft)',
+          color: 'var(--daom-blue)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Layers size={22} />
+        </div>
         <div>
-          <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>Paso 1: Parámetros del Mesociclo</h2>
-          <p style={{ fontSize: 13, color: 'var(--daom-text-secondary)', margin: 0 }}>
-            Ingresá los datos del atleta y las distribuciones metodológicas fundamentales.
+          <div className="daom-eyebrow">PASO 1 DE 2</div>
+          <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0, color: 'var(--n-900)' }}>
+            Parámetros del Mesociclo
+          </h2>
+          <p style={{ fontSize: 13, color: 'var(--n-600)', margin: 0 }}>
+            Ingresá los datos del levantador y las proporciones jerárquicas del método cubano.
           </p>
         </div>
       </div>
 
+      {/* Identificación */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, marginBottom: 24 }}>
-        {/* Identificación */}
         <div>
-          <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+          <label className="daom-label">
             Nombre del Mesociclo / Plan
           </label>
           <input
@@ -63,7 +77,7 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+          <label className="daom-label">
             Nombre del Atleta
           </label>
           <input
@@ -75,25 +89,25 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
         </div>
       </div>
 
-      {/* 4.1 Rendimiento Deportivo */}
+      {/* 4.1 Rendimiento Deportivo de Referencia */}
       <div style={{
-        backgroundColor: 'var(--daom-surface-2)',
-        borderRadius: 'var(--radius-md)',
-        padding: 16,
+        backgroundColor: 'var(--n-100)',
+        borderRadius: 'var(--r-md)',
+        padding: 20,
         marginBottom: 24,
-        border: '1px solid var(--daom-border-subtle)'
+        border: '1px solid var(--n-200)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-          <Dumbbell size={18} style={{ color: 'var(--daom-primary)' }} />
-          <h3 style={{ fontSize: 15, fontWeight: 700, margin: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+          <Dumbbell size={18} style={{ color: 'var(--daom-blue)' }} />
+          <h3 style={{ fontSize: 15, fontWeight: 700, margin: 0, color: 'var(--n-900)' }}>
             4.1 Rendimiento Deportivo de Referencia
           </h3>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20, alignItems: 'center' }}>
           <div>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-              Mejor Total Olímpico (kg) <span style={{ color: 'var(--daom-primary)' }}>*</span>
+            <label className="daom-label">
+              Mejor Total Olímpico (kg) <span style={{ color: 'var(--daom-blue)' }}>*</span>
             </label>
             <input
               type="number"
@@ -103,27 +117,36 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
               onChange={e => onChange({ totalOlympicKg: parseFloat(e.target.value) || 0 })}
               placeholder="Ej. 226"
             />
-            <span style={{ fontSize: 11, color: 'var(--daom-text-muted)' }}>
-              Suma del mejor Snatch + Clean & Jerk.
+            <span className="daom-help">
+              Suma de referencia del mejor Snatch + Clean & Jerk competitivo.
             </span>
           </div>
 
           <div style={{
-            backgroundColor: 'var(--daom-surface-1)',
-            padding: '12px 16px',
-            borderRadius: 'var(--radius-sm)',
-            border: '1px solid var(--daom-border-subtle)',
-            fontSize: 12
+            backgroundColor: '#FFFFFF',
+            padding: '16px 20px',
+            borderRadius: 'var(--r-md)',
+            border: '1px solid var(--n-200)',
+            boxShadow: 'var(--sh-sm)'
           }}>
-            <div style={{ fontWeight: 600, color: 'var(--daom-text-secondary)', marginBottom: 6 }}>
-              Rendimientos Calculados Automáticamente:
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--daom-blue)', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>
+              Rendimientos Normativos Calculados:
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <div>• Snatch (43%): <strong>{snatchRef} kg</strong></div>
-              <div>• Clean & Jerk (57%): <strong>{cjRef} kg</strong></div>
-              <div>• Squats (73.2%): <strong>{squatsRef} kg</strong></div>
-              <div style={{ color: 'var(--daom-text-muted)', fontSize: 11 }}>
-                Pulls usan las referencias de Snatch y Clean & Jerk respectivamente.
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 13, color: 'var(--n-700)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Snatch (43.0%):</span>
+                <strong style={{ color: 'var(--n-900)' }}>{snatchRef} kg</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Clean & Jerk (57.0%):</span>
+                <strong style={{ color: 'var(--n-900)' }}>{cjRef} kg</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Squats (73.2%):</span>
+                <strong style={{ color: 'var(--n-900)' }}>{squatsRef} kg</strong>
+              </div>
+              <div style={{ color: 'var(--n-500)', fontSize: 11, marginTop: 4 }}>
+                * Snatch Pulls utiliza la marca de Snatch y Clean Pulls la de Clean & Jerk.
               </div>
             </div>
           </div>
@@ -133,8 +156,8 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
       {/* 4.2 Volumen e IMR del Mesociclo */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20, marginBottom: 24 }}>
         <div>
-          <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-            4.2 Volumen Total del Mesociclo (reps) <span style={{ color: 'var(--daom-primary)' }}>*</span>
+          <label className="daom-label">
+            4.2 Volumen Total del Mesociclo (reps) <span style={{ color: 'var(--daom-blue)' }}>*</span>
           </label>
           <input
             type="number"
@@ -144,14 +167,14 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
             onChange={e => onChange({ totalReps: parseInt(e.target.value, 10) || 0 })}
             placeholder="Ej. 1250"
           />
-          <span style={{ fontSize: 11, color: 'var(--daom-text-muted)' }}>
-            Debe ser un número entero positivo. El motor conservará exactamente este volumen.
+          <span className="daom-help">
+            Número entero positivo. El motor conservará exactamente este volumen total (cero fugas).
           </span>
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-            6.2 IMR Objetivo del Mesociclo (%) <span style={{ color: 'var(--daom-primary)' }}>*</span>
+          <label className="daom-label">
+            6.2 IMR Objetivo del Mesociclo (%) <span style={{ color: 'var(--daom-blue)' }}>*</span>
           </label>
           <input
             type="number"
@@ -162,32 +185,33 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
             onChange={e => onChange({ targetMesocycleImr: parseInt(e.target.value, 10) || 0 })}
             placeholder="Ej. 67"
           />
-          <span style={{ fontSize: 11, color: 'var(--daom-text-muted)' }}>
-            Exclusivamente número entero (sin decimales). Rango estándar: 55% - 75%.
+          <span className="daom-help">
+            Número entero (sin decimales). Rango normativo en tablas cubanas: 45% a 80%.
           </span>
         </div>
       </div>
 
       {/* 4.3 y 4.4 Distribuciones Jerárquicas */}
       <div style={{
-        backgroundColor: 'var(--daom-surface-2)',
-        borderRadius: 'var(--radius-md)',
-        padding: 16,
+        backgroundColor: 'var(--n-100)',
+        borderRadius: 'var(--r-md)',
+        padding: 20,
         marginBottom: 24,
-        border: '1px solid var(--daom-border-subtle)'
+        border: '1px solid var(--n-200)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-          <Percent size={18} style={{ color: 'var(--daom-primary)' }} />
-          <h3 style={{ fontSize: 15, fontWeight: 700, margin: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+          <Percent size={18} style={{ color: 'var(--daom-blue)' }} />
+          <h3 style={{ fontSize: 15, fontWeight: 700, margin: 0, color: 'var(--n-900)' }}>
             4.3 y 4.4 Distribución Jerárquica de Ejercicios
           </h3>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
           {/* PT vs PF */}
-          <div style={{ backgroundColor: 'var(--daom-surface-1)', padding: 14, borderRadius: 'var(--radius-sm)' }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-              Preparación Técnica (PT): <strong>{data.ptPercent}%</strong>
+          <div style={{ backgroundColor: '#FFFFFF', padding: 16, borderRadius: 'var(--r-md)', border: '1px solid var(--n-200)' }}>
+            <label className="daom-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>Preparación Técnica (PT):</span>
+              <span style={{ color: 'var(--daom-blue)' }}>{data.ptPercent}%</span>
             </label>
             <input
               type="range"
@@ -195,17 +219,19 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
               max="90"
               value={data.ptPercent}
               onChange={e => onChange({ ptPercent: parseInt(e.target.value, 10) })}
+              style={{ accentColor: 'var(--daom-blue)' }}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--daom-text-secondary)', marginTop: 4 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--n-600)', marginTop: 6 }}>
               <span>PT: {data.ptPercent}%</span>
-              <span>PF (Automático): <strong>{pfCalculated}%</strong></span>
+              <span>PF (Automático): <strong style={{ color: 'var(--n-900)' }}>{pfCalculated}%</strong></span>
             </div>
           </div>
 
           {/* Snatch vs Clean & Jerk in PT */}
-          <div style={{ backgroundColor: 'var(--daom-surface-1)', padding: 14, borderRadius: 'var(--radius-sm)' }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-              Snatch dentro de PT: <strong>{data.snatchInPtPercent}%</strong>
+          <div style={{ backgroundColor: '#FFFFFF', padding: 16, borderRadius: 'var(--r-md)', border: '1px solid var(--n-200)' }}>
+            <label className="daom-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>Snatch dentro de PT:</span>
+              <span style={{ color: 'var(--daom-blue)' }}>{data.snatchInPtPercent}%</span>
             </label>
             <input
               type="range"
@@ -213,17 +239,19 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
               max="80"
               value={data.snatchInPtPercent}
               onChange={e => onChange({ snatchInPtPercent: parseInt(e.target.value, 10) })}
+              style={{ accentColor: 'var(--daom-blue)' }}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--daom-text-secondary)', marginTop: 4 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--n-600)', marginTop: 6 }}>
               <span>Snatch: {data.snatchInPtPercent}%</span>
-              <span>Clean & Jerk: <strong>{cjInPtCalculated}%</strong></span>
+              <span>Clean & Jerk: <strong style={{ color: 'var(--n-900)' }}>{cjInPtCalculated}%</strong></span>
             </div>
           </div>
 
           {/* Squats vs Pulls in PF */}
-          <div style={{ backgroundColor: 'var(--daom-surface-1)', padding: 14, borderRadius: 'var(--radius-sm)' }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-              Squats dentro de PF: <strong>{data.squatsInPfPercent}%</strong>
+          <div style={{ backgroundColor: '#FFFFFF', padding: 16, borderRadius: 'var(--r-md)', border: '1px solid var(--n-200)' }}>
+            <label className="daom-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>Squats dentro de PF:</span>
+              <span style={{ color: 'var(--daom-blue)' }}>{data.squatsInPfPercent}%</span>
             </label>
             <input
               type="range"
@@ -231,17 +259,19 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
               max="80"
               value={data.squatsInPfPercent}
               onChange={e => onChange({ squatsInPfPercent: parseInt(e.target.value, 10) })}
+              style={{ accentColor: 'var(--daom-blue)' }}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--daom-text-secondary)', marginTop: 4 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--n-600)', marginTop: 6 }}>
               <span>Squats: {data.squatsInPfPercent}%</span>
-              <span>Pulls (Total): <strong>{pullsInPfCalculated}%</strong></span>
+              <span>Pulls (Total): <strong style={{ color: 'var(--n-900)' }}>{pullsInPfCalculated}%</strong></span>
             </div>
           </div>
 
           {/* Snatch Pulls vs Clean Pulls in Pulls */}
-          <div style={{ backgroundColor: 'var(--daom-surface-1)', padding: 14, borderRadius: 'var(--radius-sm)' }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
-              Snatch Pulls dentro de Pulls: <strong>{data.snatchPullsInPullsPercent}%</strong>
+          <div style={{ backgroundColor: '#FFFFFF', padding: 16, borderRadius: 'var(--r-md)', border: '1px solid var(--n-200)' }}>
+            <label className="daom-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>Snatch Pulls dentro de Pulls:</span>
+              <span style={{ color: 'var(--daom-blue)' }}>{data.snatchPullsInPullsPercent}%</span>
             </label>
             <input
               type="range"
@@ -249,31 +279,28 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
               max="80"
               value={data.snatchPullsInPullsPercent}
               onChange={e => onChange({ snatchPullsInPullsPercent: parseInt(e.target.value, 10) })}
+              style={{ accentColor: 'var(--daom-blue)' }}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--daom-text-secondary)', marginTop: 4 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--n-600)', marginTop: 6 }}>
               <span>Snatch Pulls: {data.snatchPullsInPullsPercent}%</span>
-              <span>Clean Pulls: <strong>{cleanPullsInPullsCalculated}%</strong></span>
+              <span>Clean Pulls: <strong style={{ color: 'var(--n-900)' }}>{cleanPullsInPullsCalculated}%</strong></span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Errores / Validaciones */}
+      {/* Alertas de Validación (Icono + Texto + Color) */}
       {errors.length > 0 && (
-        <div style={{
-          backgroundColor: 'var(--daom-danger-bg)',
-          border: '1px solid var(--daom-danger)',
-          borderRadius: 'var(--radius-md)',
-          padding: 12,
-          marginBottom: 20
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--daom-danger)', fontWeight: 600, marginBottom: 4 }}>
-            <AlertTriangle size={18} />
-            <span>Por favor verificá los siguientes datos:</span>
+        <div className="daom-alert daom-alert--danger" style={{ marginBottom: 20 }}>
+          <AlertTriangle size={20} style={{ color: 'var(--danger)', flexShrink: 0 }} />
+          <div>
+            <div style={{ fontWeight: 700, color: 'var(--danger)', marginBottom: 4 }}>
+              Revisá los siguientes campos para continuar:
+            </div>
+            <ul style={{ paddingLeft: 20, fontSize: 13, color: 'var(--n-700)' }}>
+              {errors.map((err, i) => <li key={i}>{err}</li>)}
+            </ul>
           </div>
-          <ul style={{ paddingLeft: 24, fontSize: 13, color: 'var(--daom-text-secondary)' }}>
-            {errors.map((err, i) => <li key={i}>{err}</li>)}
-          </ul>
         </div>
       )}
 
@@ -282,16 +309,8 @@ export const Step1GeneralData: React.FC<Step1GeneralDataProps> = ({
         <button
           onClick={onNext}
           disabled={!isValid}
-          className="touch-target"
-          style={{
-            backgroundColor: isValid ? 'var(--daom-primary)' : 'var(--daom-surface-3)',
-            color: isValid ? '#FFFFFF' : 'var(--daom-text-muted)',
-            padding: '12px 28px',
-            borderRadius: 'var(--radius-md)',
-            fontSize: 15,
-            fontWeight: 700,
-            cursor: isValid ? 'pointer' : 'not-allowed'
-          }}
+          className="daom-btn daom-btn--primary"
+          style={{ fontSize: 14, padding: '12px 28px' }}
         >
           Continuar a Selección de Microciclos →
         </button>

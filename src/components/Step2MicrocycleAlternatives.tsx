@@ -30,22 +30,34 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
   };
 
   return (
-    <div className="daom-card" style={{ maxWidth: 900, margin: '0 auto' }}>
-      <div className="daom-card-header" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <Calendar style={{ color: 'var(--daom-primary)' }} size={22} />
+    <div className="daom-card" style={{ maxWidth: 960, margin: '0 auto 24px auto' }}>
+      <div className="daom-card-header" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{
+          width: 40,
+          height: 40,
+          borderRadius: 'var(--r-md)',
+          backgroundColor: 'var(--daom-blue-soft)',
+          color: 'var(--daom-blue)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Calendar size={22} />
+        </div>
         <div>
-          <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>
-            Paso 2: Duración y Alternativa de Distribución
+          <div className="daom-eyebrow">PASO 2 DE 2</div>
+          <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0, color: 'var(--n-900)' }}>
+            Duración y Alternativa de Microciclos
           </h2>
-          <p style={{ fontSize: 13, color: 'var(--daom-text-secondary)', margin: 0 }}>
-            Seleccioná la cantidad de microciclos y la variante oficial de carga e IMR.
+          <p style={{ fontSize: 13, color: 'var(--n-600)', margin: 0 }}>
+            Elegí la duración del mesociclo y la dinámica oficial de volumen y desplazamientos de IMR.
           </p>
         </div>
       </div>
 
       {/* Selector de Duración (Tabs) */}
       <div style={{ marginBottom: 24 }}>
-        <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
+        <label className="daom-label">
           Cantidad de Microciclos del Mesociclo:
         </label>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -56,22 +68,11 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
                 key={d}
                 type="button"
                 onClick={() => handleSelectDuration(d)}
-                className="touch-target"
+                className={`daom-btn ${isSelected ? 'daom-btn--primary' : 'daom-btn--secondary'}`}
                 style={{
                   flex: 1,
-                  minWidth: 100,
-                  padding: '12px 16px',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: isSelected ? 'var(--daom-primary)' : 'var(--daom-surface-2)',
-                  color: isSelected ? '#FFFFFF' : 'var(--daom-text-secondary)',
-                  border: isSelected ? '1px solid var(--daom-primary)' : '1px solid var(--daom-border-subtle)',
-                  fontWeight: 700,
-                  fontSize: 14,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 8,
-                  cursor: 'pointer'
+                  minWidth: 120,
+                  fontSize: 14
                 }}
               >
                 <BarChart2 size={16} />
@@ -84,11 +85,11 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
 
       {/* Lista de Alternativas Oficiales */}
       <div style={{ marginBottom: 28 }}>
-        <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 12 }}>
+        <label className="daom-label" style={{ marginBottom: 12 }}>
           Alternativas Originales del Método Cubano para {currentDuration} Microciclos:
         </label>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {alternatives.map((alt, idx) => {
             const isSelected = idx === selectedIndex;
             return (
@@ -96,23 +97,24 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
                 key={alt.id}
                 onClick={() => onChange({ selectedAlternativeIndex: idx })}
                 style={{
-                  backgroundColor: isSelected ? 'var(--daom-surface-hover)' : 'var(--daom-surface-2)',
-                  border: isSelected ? '2px solid var(--daom-primary)' : '1px solid var(--daom-border-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: 16,
+                  backgroundColor: isSelected ? '#FFFFFF' : 'var(--n-50)',
+                  border: isSelected ? '2px solid var(--daom-blue)' : '1px solid var(--n-200)',
+                  borderRadius: 'var(--r-lg)',
+                  padding: '18px 20px',
                   cursor: 'pointer',
+                  boxShadow: isSelected ? 'var(--sh-md)' : 'var(--sh-sm)',
                   transition: 'all 0.2s ease',
                   position: 'relative'
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12, flexWrap: 'wrap', gap: 10 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{
-                      width: 22,
-                      height: 22,
+                      width: 24,
+                      height: 24,
                       borderRadius: '50%',
-                      border: isSelected ? '2px solid var(--daom-primary)' : '2px solid var(--daom-border-strong)',
-                      backgroundColor: isSelected ? 'var(--daom-primary)' : 'transparent',
+                      border: isSelected ? '2px solid var(--daom-blue)' : '2px solid var(--n-300)',
+                      backgroundColor: isSelected ? 'var(--daom-blue)' : 'transparent',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -121,19 +123,19 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
                       {isSelected && <CheckCircle2 size={16} />}
                     </div>
                     <div>
-                      <div style={{ fontWeight: 700, fontSize: 15, color: '#FFFFFF' }}>
+                      <div style={{ fontWeight: 800, fontSize: 16, color: 'var(--n-900)' }}>
                         {alt.label}
                       </div>
                       {alt.description && (
-                        <div style={{ fontSize: 12, color: 'var(--daom-text-secondary)', marginTop: 2 }}>
+                        <div style={{ fontSize: 13, color: 'var(--n-600)', marginTop: 2 }}>
                           {alt.description}
                         </div>
                       )}
                     </div>
                   </div>
 
-                  <span className="badge badge-info" style={{ fontSize: 11 }}>
-                    Alternativa {alt.id}
+                  <span className={`badge ${isSelected ? 'badge-info' : 'badge-neutral'}`}>
+                    Alternativa {alt.id} {isSelected ? '• Seleccionada' : ''}
                   </span>
                 </div>
 
@@ -141,11 +143,11 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: `repeat(${alt.volumePercentages.length}, 1fr)`,
-                  gap: 8,
-                  marginTop: 12,
-                  backgroundColor: 'var(--daom-surface-1)',
-                  padding: 12,
-                  borderRadius: 'var(--radius-sm)'
+                  gap: 10,
+                  backgroundColor: isSelected ? 'var(--daom-blue-soft)' : '#FFFFFF',
+                  padding: '14px 16px',
+                  borderRadius: 'var(--r-md)',
+                  border: '1px solid var(--n-200)'
                 }}>
                   {alt.volumePercentages.map((pct, mIdx) => {
                     const disp = alt.imrDisplacements[mIdx];
@@ -154,33 +156,33 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
 
                     return (
                       <div key={mIdx} style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--daom-text-secondary)' }}>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--n-700)' }}>
                           Micro {mIdx + 1}
                         </div>
                         <div style={{
                           height: 8,
-                          backgroundColor: 'var(--daom-surface-3)',
+                          backgroundColor: 'var(--n-200)',
                           borderRadius: 4,
-                          margin: '6px 0',
+                          margin: '8px 0',
                           overflow: 'hidden'
                         }}>
                           <div style={{
                             width: `${(pct / 45) * 100}%`,
                             height: '100%',
-                            backgroundColor: isSelected ? 'var(--daom-primary)' : 'var(--daom-text-muted)',
+                            backgroundColor: isSelected ? 'var(--daom-blue)' : 'var(--n-400)',
                             borderRadius: 4
                           }} />
                         </div>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: '#FFFFFF' }}>
+                        <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--n-900)' }}>
                           {pct}%
                         </div>
-                        <div style={{ fontSize: 11, color: 'var(--daom-text-secondary)' }}>
+                        <div style={{ fontSize: 12, color: 'var(--n-600)' }}>
                           ~{approxReps} reps
                         </div>
                         <div style={{
                           fontSize: 11,
-                          fontWeight: 600,
-                          color: disp > 0 ? 'var(--daom-success)' : disp < 0 ? 'var(--daom-warning)' : 'var(--daom-text-muted)',
+                          fontWeight: 700,
+                          color: disp > 0 ? 'var(--success)' : disp < 0 ? 'var(--warning)' : 'var(--n-600)',
                           marginTop: 4
                         }}>
                           IMR: {targetMicroImr}% ({disp >= 0 ? `+${disp}` : disp})
@@ -199,31 +201,16 @@ export const Step2MicrocycleAlternatives: React.FC<Step2MicrocycleAlternativesPr
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <button
           onClick={onBack}
-          className="touch-target"
-          style={{
-            backgroundColor: 'var(--daom-surface-2)',
-            color: 'var(--daom-text-secondary)',
-            padding: '12px 20px',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--daom-border-subtle)',
-            fontSize: 14,
-            fontWeight: 600
-          }}
+          className="daom-btn daom-btn--secondary"
+          style={{ fontSize: 14 }}
         >
           ← Volver a Datos
         </button>
 
         <button
           onClick={onCalculate}
-          className="touch-target"
-          style={{
-            backgroundColor: 'var(--daom-primary)',
-            color: '#FFFFFF',
-            padding: '12px 28px',
-            borderRadius: 'var(--radius-md)',
-            fontSize: 15,
-            fontWeight: 700
-          }}
+          className="daom-btn daom-btn--primary"
+          style={{ fontSize: 14, padding: '12px 28px' }}
         >
           Calcular Mesociclo Completo ⚡
         </button>

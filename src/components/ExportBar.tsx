@@ -29,71 +29,53 @@ export const ExportBar: React.FC<ExportBarProps> = ({ plan, onPlanSaved }) => {
   };
 
   return (
-    <div className="daom-card no-print" style={{ marginBottom: 24, padding: '14px 20px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 14, fontWeight: 700, color: '#FFFFFF' }}>
-            Acciones y Exportación:
-          </span>
-          <span style={{ fontSize: 12, color: 'var(--daom-text-secondary)' }}>
-            Descargá tu planificación en Excel o imprimí/guardá en PDF.
-          </span>
+    <div className="daom-card no-print" style={{ marginBottom: 24, padding: '16px 24px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
+        <div>
+          <div className="daom-eyebrow" style={{ marginBottom: 2 }}>
+            EXPORTACIÓN Y ALMACENAMIENTO
+          </div>
+          <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--n-900)', margin: 0 }}>
+            Acciones del Mesociclo
+          </h2>
+          <p style={{ fontSize: 13, color: 'var(--n-600)', margin: 0 }}>
+            Descargá la planificación en formato Excel oficial o generá un PDF listo para imprimir.
+          </p>
         </div>
 
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          {/* Guardar Local */}
           <button
             onClick={handleSave}
-            className="touch-target"
-            style={{
-              padding: '8px 16px',
-              backgroundColor: isSavedFeedback ? 'var(--daom-success)' : 'var(--daom-surface-2)',
-              color: '#FFFFFF',
-              borderRadius: 'var(--radius-md)',
-              border: isSavedFeedback ? '1px solid var(--daom-success)' : '1px solid var(--daom-border-subtle)',
-              fontSize: 13,
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
-            }}
+            className={`daom-btn ${isSavedFeedback ? 'badge-success' : 'daom-btn--secondary'}`}
+            style={{ fontSize: 13 }}
+            title="Guardar mesociclo en el almacenamiento local del dispositivo"
           >
             {isSavedFeedback ? <CheckCircle2 size={16} /> : <Save size={16} />}
-            <span>{isSavedFeedback ? 'Guardado!' : 'Guardar Local'}</span>
+            <span>{isSavedFeedback ? '¡Guardado Exitoso!' : 'Guardar Local'}</span>
           </button>
 
+          {/* Exportar a Excel */}
           <button
             onClick={handleExcel}
-            className="touch-target"
+            className="daom-btn"
             style={{
-              padding: '8px 16px',
-              backgroundColor: '#107C41', // Excel brand green
+              backgroundColor: '#107C41',
               color: '#FFFFFF',
-              borderRadius: 'var(--radius-md)',
-              fontSize: 13,
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
+              fontSize: 13
             }}
+            title="Exportar a archivo Excel .xlsx con 4 hojas analíticas"
           >
             <FileSpreadsheet size={16} />
             <span>Exportar Excel (.xlsx)</span>
           </button>
 
+          {/* Imprimir / PDF */}
           <button
             onClick={handlePrintPdf}
-            className="touch-target"
-            style={{
-              padding: '8px 16px',
-              backgroundColor: 'var(--daom-primary)',
-              color: '#FFFFFF',
-              borderRadius: 'var(--radius-md)',
-              fontSize: 13,
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
-            }}
+            className="daom-btn daom-btn--primary"
+            style={{ fontSize: 13 }}
+            title="Generar versión imprimible optimizada para entrenadores de sala"
           >
             <Printer size={16} />
             <span>Imprimir / PDF</span>

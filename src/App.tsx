@@ -100,33 +100,21 @@ export const App: React.FC = () => {
 
       {/* Navegación de Estados / Pasos */}
       {currentStep !== 4 && (
-        <div className="daom-card no-print" style={{ marginBottom: 20, padding: 12, display: 'flex', justifyContent: 'center', gap: 12 }}>
+        <div className="daom-card no-print" style={{ marginBottom: 20, padding: '12px 20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12 }}>
           <button
             onClick={() => setCurrentStep(1)}
-            style={{
-              padding: '8px 16px',
-              borderRadius: 'var(--radius-md)',
-              backgroundColor: currentStep === 1 ? 'var(--daom-primary)' : 'transparent',
-              color: currentStep === 1 ? '#FFFFFF' : 'var(--daom-text-secondary)',
-              fontWeight: 700,
-              fontSize: 13
-            }}
+            className={`daom-btn ${currentStep === 1 ? 'daom-btn--primary' : 'daom-btn--secondary'}`}
+            style={{ fontSize: 13 }}
           >
             1. Datos del Mesociclo
           </button>
 
-          <span style={{ color: 'var(--daom-text-muted)', alignSelf: 'center' }}>→</span>
+          <span style={{ color: 'var(--n-400)', fontWeight: 700 }}>→</span>
 
           <button
             onClick={() => setCurrentStep(2)}
-            style={{
-              padding: '8px 16px',
-              borderRadius: 'var(--radius-md)',
-              backgroundColor: currentStep === 2 ? 'var(--daom-primary)' : 'transparent',
-              color: currentStep === 2 ? '#FFFFFF' : 'var(--daom-text-secondary)',
-              fontWeight: 700,
-              fontSize: 13
-            }}
+            className={`daom-btn ${currentStep === 2 ? 'daom-btn--primary' : 'daom-btn--secondary'}`}
+            style={{ fontSize: 13 }}
           >
             2. Selección de Microciclos
           </button>
@@ -156,32 +144,21 @@ export const App: React.FC = () => {
       {currentStep === 4 && activePlan && (
         <div>
           {/* Barra de Modificar Entradas */}
-          <div className="daom-card no-print" style={{ marginBottom: 20, padding: '12px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div className="daom-card no-print" style={{ marginBottom: 20, padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
               <span className="badge badge-success">
-                <CheckCircle2 size={14} />
+                <CheckCircle2 size={15} />
                 <span>Mesociclo Calculado con Éxito</span>
               </span>
-              <span style={{ fontSize: 13, color: 'var(--daom-text-secondary)' }}>
-                {activePlan.totalRepsActual} reps | {activePlan.input.durationMicros} micros | IMR: {activePlan.realImr}% (Obj: {activePlan.targetImr}%)
+              <span style={{ fontSize: 13, color: 'var(--n-600)', fontWeight: 600 }}>
+                {activePlan.totalRepsActual} reps | {activePlan.input.durationMicros} micros | IMR: <strong style={{ color: 'var(--n-900)' }}>{activePlan.realImr}%</strong> (Objetivo: {activePlan.targetImr}%)
               </span>
             </div>
 
             <button
               onClick={() => setCurrentStep(1)}
-              className="touch-target"
-              style={{
-                backgroundColor: 'var(--daom-surface-2)',
-                color: 'var(--daom-text-primary)',
-                padding: '6px 14px',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--daom-border-subtle)',
-                fontSize: 13,
-                fontWeight: 600,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
-              }}
+              className="daom-btn daom-btn--secondary"
+              style={{ fontSize: 13 }}
             >
               <Edit3 size={15} />
               <span>Modificar Parámetros y Recalcular</span>

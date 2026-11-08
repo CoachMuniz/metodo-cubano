@@ -23,55 +23,47 @@ export const SavedPlansModal: React.FC<SavedPlansModalProps> = ({ onClose, onSel
   };
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 9999,
-      padding: 16
-    }}>
-      <div className="daom-card" style={{
-        maxWidth: 650,
-        width: '100%',
-        maxHeight: '85vh',
-        overflowY: 'auto',
-        backgroundColor: 'var(--daom-surface-1)',
-        border: '1px solid var(--daom-border-strong)'
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, borderBottom: '1px solid var(--daom-border-subtle)', paddingBottom: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <FolderKanban style={{ color: 'var(--daom-primary)' }} size={22} />
+    <div className="daom-modal-backdrop" onClick={onClose}>
+      <div className="daom-modal" onClick={e => e.stopPropagation()} style={{ maxWidth: 660 }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, borderBottom: '1px solid var(--n-200)', paddingBottom: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{
+              width: 40,
+              height: 40,
+              borderRadius: 'var(--r-md)',
+              backgroundColor: 'var(--daom-blue-soft)',
+              color: 'var(--daom-blue)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <FolderKanban size={22} />
+            </div>
             <div>
-              <h2 style={{ fontSize: 18, fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
-                Mesociclos Guardados (Almacenamiento Local PWA)
+              <div className="daom-eyebrow">PERSISTENCIA LOCAL</div>
+              <h2 style={{ fontSize: 18, fontWeight: 800, margin: 0, color: 'var(--n-900)' }}>
+                Mesociclos Guardados
               </h2>
-              <p style={{ fontSize: 12, color: 'var(--daom-text-secondary)', margin: 0 }}>
-                Consultá y recuperá planificaciones previas sin conexión a internet.
-              </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="touch-target"
-            style={{ backgroundColor: 'transparent', color: 'var(--daom-text-secondary)', padding: 6 }}
+            className="daom-btn daom-btn--ghost"
+            style={{ padding: 8, minHeight: 'auto', minWidth: 'auto' }}
+            title="Cerrar modal"
           >
             <X size={20} />
           </button>
         </div>
 
         {plans.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--daom-text-muted)' }}>
+          <div style={{ textAlign: 'center', padding: '48px 20px', color: 'var(--n-500)', fontSize: 14 }}>
             No hay mesociclos guardados localmente todavía. Creá y guardá uno para verlo aquí.
           </div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 20 }}>
             {plans.map(p => (
               <div
                 key={p.id}
@@ -80,74 +72,55 @@ export const SavedPlansModal: React.FC<SavedPlansModalProps> = ({ onClose, onSel
                   onClose();
                 }}
                 style={{
-                  backgroundColor: 'var(--daom-surface-2)',
-                  border: '1px solid var(--daom-border-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: 14,
+                  backgroundColor: 'var(--n-50)',
+                  border: '1px solid var(--n-200)',
+                  borderRadius: 'var(--r-md)',
+                  padding: '14px 18px',
                   cursor: 'pointer',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  transition: 'background-color 0.2s ease'
+                  transition: 'border-color 0.2s ease, box-shadow 0.2s ease'
                 }}
               >
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: 15, color: '#FFFFFF' }}>
+                  <div style={{ fontWeight: 800, fontSize: 15, color: 'var(--n-900)' }}>
                     {p.name}
                   </div>
-                  <div style={{ fontSize: 12, color: 'var(--daom-text-secondary)', marginTop: 2, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                    {p.athleteName && <span>Atleta: <strong>{p.athleteName}</strong></span>}
-                    <span>Total: <strong>{p.totalOlympicKg} kg</strong></span>
-                    <span>Volumen: <strong>{p.totalReps} reps</strong></span>
-                    <span>{p.durationMicros} micros</span>
-                    <span>IMR: <strong>{p.realImr}%</strong> (Obj: {p.targetImr}%)</span>
-                  </div>
-                  <div style={{ fontSize: 11, color: 'var(--daom-text-muted)', marginTop: 4 }}>
-                    Guardado: {new Date(p.createdAt).toLocaleDateString('es-ES')} {new Date(p.createdAt).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                  <div style={{ fontSize: 12, color: 'var(--n-600)', marginTop: 4, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    {p.athleteName && <span>Atleta: <strong style={{ color: 'var(--n-900)' }}>{p.athleteName}</strong></span>}
+                    <span>Total: <strong style={{ color: 'var(--n-900)' }}>{p.totalOlympicKg} kg</strong></span>
+                    <span>Volumen: <strong style={{ color: 'var(--daom-blue)' }}>{p.totalReps} reps</strong></span>
+                    <span>Duración: <strong>{p.durationMicros} micros</strong></span>
+                    <span>Fecha: {new Date(p.createdAt).toLocaleDateString('es-ES')}</span>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <button
-                    onClick={(e) => handleDelete(p.id, e)}
-                    className="touch-target"
+                    onClick={e => handleDelete(p.id, e)}
+                    className="daom-btn daom-btn--danger"
+                    style={{ padding: '6px 10px', fontSize: 12, minHeight: 36 }}
                     title="Eliminar este mesociclo"
-                    style={{
-                      padding: 8,
-                      backgroundColor: 'transparent',
-                      color: 'var(--daom-danger)',
-                      borderRadius: 'var(--radius-sm)'
-                    }}
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={15} />
                   </button>
 
-                  <button
-                    className="touch-target badge badge-info"
-                    style={{ padding: '6px 12px', fontSize: 12 }}
-                  >
-                    <span>Cargar</span>
-                    <ArrowRightCircle size={14} />
-                  </button>
+                  <div style={{ color: 'var(--daom-blue)', display: 'flex', alignItems: 'center' }}>
+                    <ArrowRightCircle size={22} />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid var(--daom-border-subtle)', paddingTop: 14, marginTop: 20 }}>
+        {/* Footer */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid var(--n-200)', paddingTop: 16 }}>
           <button
             onClick={onClose}
-            className="touch-target"
-            style={{
-              padding: '10px 18px',
-              backgroundColor: 'var(--daom-surface-2)',
-              color: 'var(--daom-text-secondary)',
-              border: '1px solid var(--daom-border-subtle)',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 600,
-              fontSize: 13
-            }}
+            className="daom-btn daom-btn--secondary"
+            style={{ fontSize: 14 }}
           >
             Cerrar
           </button>
