@@ -1,0 +1,18 @@
+{
+  "name": "Calculadora Método Cubano — Weightlifting PWA",
+  "short_name": "Método Cubano",
+  "description": "Automatización metodológica y matemática de mesociclos de Weightlifting según el método cubano.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0D",
+  "theme_color": "#0B0B0D",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

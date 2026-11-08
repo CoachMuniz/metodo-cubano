@@ -1,0 +1,211 @@
+/* DAOM Weightlifting Dark Theme Tokens & Global Styles */
+:root {
+  --daom-bg-deep: #0B0B0D;
+  --daom-surface-1: #121316;
+  --daom-surface-2: #181A20;
+  --daom-surface-3: #22252D;
+  --daom-surface-hover: #2B2F38;
+  
+  --daom-border-subtle: #2A2D35;
+  --daom-border-strong: #3E434F;
+  --daom-border-active: #1677D2;
+
+  --daom-primary: #1677D2;
+  --daom-primary-hover: #1985EC;
+  --daom-primary-soft: rgba(22, 119, 210, 0.15);
+  
+  --daom-text-primary: #FFFFFF;
+  --daom-text-secondary: #D1D5DB;
+  --daom-text-muted: #9CA3AF;
+  
+  --daom-success: #10B981;
+  --daom-success-bg: rgba(16, 185, 129, 0.15);
+  --daom-warning: #F59E0B;
+  --daom-warning-bg: rgba(245, 158, 11, 0.15);
+  --daom-danger: #EF4444;
+  --daom-danger-bg: rgba(239, 68, 68, 0.15);
+  --daom-info: #3B82F6;
+  --daom-info-bg: rgba(59, 130, 246, 0.15);
+
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --touch-target: 44px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--daom-bg-deep);
+  color: var(--daom-text-primary);
+  font-family: var(--font-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Base button styles */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Touch accessibility */
+.touch-target {
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inputs */
+input, select {
+  font-family: inherit;
+  background-color: var(--daom-surface-1);
+  border: 1px solid var(--daom-border-subtle);
+  color: var(--daom-text-primary);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 15px;
+  min-height: var(--touch-target);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+input:focus, select:focus {
+  border-color: var(--daom-primary);
+  box-shadow: 0 0 0 2px var(--daom-primary-soft);
+  outline: none;
+}
+
+/* Card surfaces */
+.daom-card {
+  background-color: var(--daom-surface-1);
+  border: 1px solid var(--daom-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.daom-card-header {
+  border-bottom: 1px solid var(--daom-border-subtle);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+/* Responsive tables */
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--daom-border-subtle);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background-color: var(--daom-surface-2);
+  color: var(--daom-text-secondary);
+  font-weight: 600;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--daom-border-subtle);
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--daom-border-subtle);
+  color: var(--daom-text-primary);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: var(--daom-surface-hover);
+}
+
+/* Badges & Tags */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-success {
+  background-color: var(--daom-success-bg);
+  color: var(--daom-success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-warning {
+  background-color: var(--daom-warning-bg);
+  color: var(--daom-warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-danger {
+  background-color: var(--daom-danger-bg);
+  color: var(--daom-danger);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-info {
+  background-color: var(--daom-info-bg);
+  color: var(--daom-info);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* Print Stylesheet for High-Quality PDF/Paper output */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .daom-card {
+    background-color: #FFFFFF !important;
+    border: 1px solid #CCCCCC !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+
+  th {
+    background-color: #F3F4F6 !important;
+    color: #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+  }
+
+  td {
+    color: #000000 !important;
+    border-bottom: 1px solid #E5E7EB !important;
+  }
+
+  .badge {
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+    background: transparent !important;
+  }
+}

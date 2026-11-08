@@ -1,0 +1,3 @@
+FORMATO MESO.xlsx -> [rutinas R62 C3]: METODO ONDULATORIO:
+FORMATO MESO.xlsx -> [COD. DE EJER. R21 C3]: Arranque sin desplazamiento
+FORMATO MESO.xlsx -> [COD. DE EJER. R23 C3]: Arranque colgado parado, sin desplazamiento
