@@ -4,12 +4,11 @@ import { calculateMesocycle } from './engine/calculator';
 import { Header } from './components/Header';
 import { Step1GeneralData } from './components/Step1GeneralData';
 import { Step2MicrocycleAlternatives } from './components/Step2MicrocycleAlternatives';
-import { GeneralOverview } from './components/GeneralOverview';
-import { MicrocycleView } from './components/MicrocycleView';
 import { DailyView } from './components/DailyView';
 import { ExportBar } from './components/ExportBar';
 import { MathematicalAuditModal } from './components/MathematicalAuditModal';
 import { SavedPlansModal } from './components/SavedPlansModal';
+import { HowToUseModal } from './components/HowToUseModal';
 import { loadPlan, getLastActivePlanId, savePlan } from './storage/planStore';
 import { Edit3, CheckCircle2 } from 'lucide-react';
 
@@ -34,6 +33,7 @@ export const App: React.FC = () => {
 
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
   const [isSavedPlansModalOpen, setIsSavedPlansModalOpen] = useState(false);
+  const [isHowToUseOpen, setIsHowToUseOpen] = useState(false);
 
   // Cargar último plan o calcular default inicial
   useEffect(() => {
@@ -95,6 +95,7 @@ export const App: React.FC = () => {
         onOpenSavedPlans={() => setIsSavedPlansModalOpen(true)}
         onNewPlan={handleNewPlan}
         onOpenAudit={() => setIsAuditModalOpen(true)}
+        onOpenHowToUse={() => setIsHowToUseOpen(true)}
         isAuditPassed={activePlan?.audit.isVolumeConserved100 ?? false}
       />
 
@@ -140,10 +141,10 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Paso 4: Resultados Completos de la Planificación */}
+      {/* Paso 4: Planificación Diaria de Cargas */}
       {currentStep === 4 && activePlan && (
         <div>
-          {/* Barra de Modificar Entradas */}
+          {/* Barra de Estado y Modificar Entradas */}
           <div className="daom-card no-print" style={{ marginBottom: 20, padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
               <span className="badge badge-success">
@@ -168,13 +169,7 @@ export const App: React.FC = () => {
           {/* Barra de Exportación y Acciones */}
           <ExportBar plan={activePlan} />
 
-          {/* 11.1 Vista General */}
-          <GeneralOverview plan={activePlan} />
-
-          {/* 11.2 Vista por Microciclo */}
-          <MicrocycleView plan={activePlan} />
-
-          {/* 11.3 Vista Diaria Completa */}
+          {/* Vista Diaria de la Planificación */}
           <DailyView plan={activePlan} />
         </div>
       )}
@@ -191,6 +186,12 @@ export const App: React.FC = () => {
         <SavedPlansModal
           onClose={() => setIsSavedPlansModalOpen(false)}
           onSelectPlan={handleSelectSavedPlan}
+        />
+      )}
+
+      {isHowToUseOpen && (
+        <HowToUseModal
+          onClose={() => setIsHowToUseOpen(false)}
         />
       )}
     </div>

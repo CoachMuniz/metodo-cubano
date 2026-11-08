@@ -1,10 +1,11 @@
 import React from 'react';
-import { ShieldCheck, FolderKanban, PlusCircle, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, FolderKanban, PlusCircle, CheckCircle2, HelpCircle } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSavedPlans: () => void;
   onNewPlan: () => void;
   onOpenAudit: () => void;
+  onOpenHowToUse: () => void;
   isAuditPassed: boolean;
 }
 
@@ -12,6 +13,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSavedPlans,
   onNewPlan,
   onOpenAudit,
+  onOpenHowToUse,
   isAuditPassed
 }) => {
   return (
@@ -59,6 +61,17 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Acciones de Navegación */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+        {/* ¿Cómo usar? */}
+        <button
+          onClick={onOpenHowToUse}
+          className="daom-btn daom-btn--secondary"
+          style={{ fontSize: 13 }}
+          title="Ver explicación de cómo funciona y cómo se usa la calculadora"
+        >
+          <HelpCircle size={16} />
+          <span>¿Cómo usar?</span>
+        </button>
+
         {/* Auditoría Matemática en vivo */}
         <button
           onClick={onOpenAudit}

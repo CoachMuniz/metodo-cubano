@@ -34,7 +34,7 @@ export const DailyView: React.FC<DailyViewProps> = ({ plan }) => {
         <div>
           <div className="daom-eyebrow">DISTRIBUCIÓN Y PRESCRIPCIÓN DE CARGAS</div>
           <h2 style={{ fontSize: 18, fontWeight: 800, margin: 0, color: 'var(--n-900)' }}>
-            11.3 Vista Diaria de la Planificación
+            Vista Diaria de la Planificación
           </h2>
           <p style={{ fontSize: 13, color: 'var(--n-600)', margin: 0 }}>
             Desglose analítico: Microciclo → Día → Ejercicio → Cargas en kg y repeticiones.
